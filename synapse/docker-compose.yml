@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: matrixdotorg/synapse:v1.42.0@sha256:10a1dd576504af002a1107d6d1edddc5bb891ccfc404218fbd99a15531cef742
+    image: matrixdotorg/synapse:v1.95.0@sha256:a79ad98b73910fcc4f1cc21cbc958c6ac0a93910d83138814ba01b83885fb3ee
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 1m
