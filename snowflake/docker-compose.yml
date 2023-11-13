@@ -7,7 +7,7 @@ services:
       APP_PORT: 3800
 
   proxy:
-    image: getumbrel/snowflake:v2.4.1@sha256:36b666435f4f3952dd10afa948e760e46f7e3f6f30b6a6f16c6b0cbeba358916
+    image: smolgrrr/snowflake-proxy:v2.7.0@sha256:dbaf817c1b0464ac2341cc0ce4c91e566d74c4498055d8cc6e12663efb9934a0
     restart: on-failure
     stop_grace_period: 1m
     command: "-log /data/snowflake.log -verbose"
