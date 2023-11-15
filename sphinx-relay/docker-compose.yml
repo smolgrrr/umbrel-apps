@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: sphinxlightning/sphinx-relay:v2.3.2@sha256:8713f9f5febb606fe39fb8c88d9877ac48bf01865e5a395ea51e26a34c077c3f
+    image: sphinxlightning/sphinx-relay:v2.4.8@sha256:9c1a5d1a337162f1174130f12bce53654da481366efce6910e5a1f2e00a1b119
     init: true
     restart: on-failure
     stop_grace_period: 1m

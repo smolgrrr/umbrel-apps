@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: sphinx-relay
 category: social
 name: Sphinx Relay
-version: "2.3.2"
+version: "v2.4.8"
 tagline: Chat and pay over the Lightning Network
 description: >-
   Sphinx Relay turns your Lightning node into a personal
@@ -32,7 +32,15 @@ defaultPassword: ""
 submitter: Stakwork
 submission: https://github.com/getumbrel/umbrel/pull/341
 releaseNotes: >-
-  This release updates Sphinx Relay from version 2.2.13 to 2.3.2.
+  This release updates Sphinx Relay from version 2.3.2 to 2.4.8.
+
+  - new admin auth and routes for swarm
+
+  - ML bot
+
+  - fix lookup invoice msat amount
+
+  - fetch invoice can use payment hash also
 
 
   Full release notes and detailed information is available at https://github.com/stakwork/sphinx-relay/releases
