@@ -2,7 +2,7 @@ manifestVersion: 1
 id: overseerr
 category: media
 name: Overseerr
-version: "1.32.5"
+version: "1.33.2"
 tagline: Beautiful media discovery
 description: >-
   Overseerr is a request management and media discovery tool built to work with your existing Plex ecosystem.
@@ -29,7 +29,25 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
-releaseNotes: ""
+releaseNotes: >-
+  This update of Overseerr from version 1.32.5 to 1.33.2 includes various bug fixes, improvements, and new features, including the following highlights.
+
+  New:
+
+    - Availability Sync: This long-awaited feature is finally here. Overseerr will now synchronize the media availability state with your Plex and Radarr/Sonnar instances. This means if you delete items from your Plex and Radarr/Sonarr, Overseerr will now update the media status to reflect the change so it can be requested again.
+
+  Fixed:
+
+    - Removed the ability to customize the watchlist sync job schedule
+    - You can now add a streaming service custom slider to your discover page.
+    - You can now enable user tagging for your Radarr/Sonarr instances. 
+    - You can now filter on browse pages by TMDB user vote count. Combining this with TMDB score can give you much better results.]
+    - Download statuses will automatically auto-refresh on title cards when they are in progress.
+    - If you have users with over 1000 requests, they can now be deleted if you choose to do so.
+    - Resolved issue with create slider causing incorrect form submission
+    - Handle issue causing incorrect media to change to unknown
+
+  To view the full release notes visit: https://github.com/sct/overseerr/releases
 torOnly: false
 submitter: Umbrel
 submission: https://github.com/getumbrel/umbrel-apps/pull/607
