@@ -14,6 +14,8 @@ services:
       - ${APP_DATA_DIR}/data/assets:/opt/data/assets
     environment:
       - PENPOT_FLAGS=enable-registration enable-login-with-password
+      - PENPOT_BACKEND_URI=http://penpot_penpot-backend_1
+      - PENPOT_EXPORTER_URI=http://penpot_penpot-exporter_1
     depends_on:
       - penpot-backend
       - penpot-exporter
@@ -43,7 +45,7 @@ services:
     image: penpotapp/exporter:1.19.3@sha256:141404bf137fc030c9b8359a83c1d77a4693deb59a50af3612f35d3a22cec8d0
     user: "1000:1000"
     environment:
-      - PENPOT_PUBLIC_URI=http://penpot-frontend
+      - PENPOT_PUBLIC_URI=http://penpot_penpot-frontend_1
       - PENPOT_REDIS_URI=redis://penpot-redis/0
     restart: on-failure
 
