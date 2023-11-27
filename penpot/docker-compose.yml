@@ -6,7 +6,7 @@ services:
       APP_HOST: penpot_penpot-frontend_1
       APP_PORT: 80
       # Can consider disabling auth all together. Penpot has its own auth system.
-      PROXY_AUTH_WHITELIST: "/api/*"
+      PROXY_AUTH_ADD: "false"
 
   penpot-frontend:
     image: penpotapp/frontend:1.19.3@sha256:6c0ff81ad041d95f0e78527c0003972620028f06319369dc98a71d69dcfe53fb
