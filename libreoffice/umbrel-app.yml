@@ -2,7 +2,7 @@ manifestVersion: 1
 id: libreoffice
 category: files
 name: LibreOffice
-version: "7.2.7"
+version: "7.5.5"
 tagline: Do more - easier, quicker, smarter
 description: >-
   LibreOffice is a free and powerful office suite, and a successor to OpenOffice.org (commonly known as OpenOffice). Its clean interface and feature-rich tools help you unleash your creativity and enhance your productivity.
@@ -40,6 +40,11 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+releaseNotes: >-
+  This update takes LibreOffice from v7.2.7 to v7.5.5
+
+
+  See the full release notes here: https://github.com/linuxserver/docker-libreoffice/releases
 torOnly: false
 submitter: Pranshu Agrawal
 submission: https://github.com/getumbrel/umbrel-apps/pull/216

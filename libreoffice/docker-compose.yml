@@ -7,7 +7,7 @@ services:
       APP_PORT: 3000
 
   server:
-    image: linuxserver/libreoffice:7.2.7@sha256:1f434cd23a010dce12af364cc0a7e71e4fdb8299bcc6f9b022ae7890b5475562
+    image: linuxserver/libreoffice:7.5.5@sha256:b8791a12818f52b714f55643c0086252610513f3960fc139cc3b6da90f4bebe4
     restart: on-failure
     stop_grace_period: 1m
     environment:
