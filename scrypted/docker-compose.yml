@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: scrypted_server_1
+      APP_PORT: 11080
+
+  server:
+    image: koush/scrypted:18-jammy-lite-v0.68.0@sha256:adaed0c9d08f2b4ccfb1369548c65104787e1b8db04a550e6ea7909145d400bc
+    environment:
+      - SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION=Bearer $APP_PASSWORD
+      - SCRYPTED_WEBHOOK_UPDATE=http://$DEVICE_DOMAIN_NAME:10444/v1/update
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ${APP_DATA_DIR}/data/scrypted:/server/volume
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"

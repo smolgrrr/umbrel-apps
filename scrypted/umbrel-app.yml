@@ -1,0 +1,25 @@
+manifestVersion: 1
+id: scrypted
+category: automation
+name: Scrypted
+version: "v0.68.0"
+tagline: High performance home video integration and automation platform
+description: >-
+  Scrypted is a high performance home video integration platform and NVR with smart detections. 
+  Instant, low latency, streaming to HomeKit, Google Home, and Alexa. 
+  Supports most cameras
+developer: koush
+website: https://www.scrypted.app/
+dependencies: []
+repo: https://github.com/koush/scrypted
+support: https://github.com/koush/scrypted/issues
+port: 11080
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: smolgrrr
+submission: 
