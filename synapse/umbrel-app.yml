@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: synapse
 category: social
 name: Synapse
-version: "1.42.0"
+version: "1.98.0"
 tagline: Matrix reference homeserver
 description: >-
   Synapse is a reference "homeserver" implementation of Matrix from
@@ -30,6 +30,23 @@ gallery:
   - 2.jpg
   - 3.jpg
 path: ""
+releaseNotes: >-
+  Synapse v1.98.0 brings the following changes:
+
+
+  - Synapse now declares support for Matrix v1.7, v1.8, and v1.9
+  
+  - Add on_user_login module API callback for when a user logs in.
+
+  - Support MSC4069: Inhibit profile propagation
+
+  - Follow redirects when downloading media over federation
+
+  - And more.
+
+
+  For more detailed information on this update, please refer to the full release notes 
+  available at https://github.com/matrix-org/synapse/releases
 defaultUsername: ""
 defaultPassword: ""
 torOnly: false
