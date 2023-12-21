@@ -15,9 +15,6 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
-    ports:
-      - target: 80
-        mode: host
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
@@ -26,6 +23,11 @@ services:
     restart: unless-stopped
     environment:
       - DOMAIN=$DEVICE_DOMAIN_NAME
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_DOMAIN_NAME`)"
+      - "traefik.http.routers.public-pool-ui.entrypoints=web"
+      - "traefik.http.services.public-pool-ui.loadbalancer.server.port=80"
 
   server:
     image: sethforprivacy/public-pool:4bb00f2@sha256:0fc82e7123be68650c9e31f57a5a206e622acbcaa170e31219a488818ad6da6b
@@ -49,3 +51,8 @@ services:
       - API_SECURE=false
       - ENABLE_SOLO=true
       - ENABLE_PROXY=false
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_DOMAIN_NAME`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.public-pool-api.entrypoints=web"
+      - "traefik.http.services.public-pool-api.loadbalancer.server.port=3334"
