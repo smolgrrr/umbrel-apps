@@ -4,7 +4,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: public-pool_traefik_1
-      APP_PORT: 4513
+      APP_PORT: 8080
       PROXY_AUTH_WHITELIST: "/api/*"
 
   traefik:
@@ -16,7 +16,9 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
     ports:
-      - "4513:80"
+      - target: 80
+        published: 8080
+        mode: host
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
