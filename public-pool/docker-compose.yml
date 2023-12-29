@@ -25,7 +25,7 @@ services:
       - DOMAIN=$DEVICE_DOMAIN_NAME
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.public-pool-ui.rule=ClientIP(`127.0.1.1`)"
+      - "traefik.http.routers.public-pool-ui.rule=ClientIP(`100.121.135.142`)"
       - "traefik.http.routers.public-pool-ui.entrypoints=web"
       - "traefik.http.services.public-pool-ui.loadbalancer.server.port=80"
 
@@ -53,6 +53,6 @@ services:
       - ENABLE_PROXY=false
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.public-pool-api.rule=ClientIP(`127.0.1.1`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.public-pool-api.rule=ClientIP(`100.121.135.142`) && PathPrefix(`/api`)"
       - "traefik.http.routers.public-pool-api.entrypoints=web"
       - "traefik.http.services.public-pool-api.loadbalancer.server.port=3334"
