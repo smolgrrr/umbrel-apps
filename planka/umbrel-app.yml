@@ -1,0 +1,23 @@
+manifestVersion: 1.1
+id: planka
+category: files
+name: Planka
+version: "1.15.3"
+tagline: Elegant open source project tracking (Kanban)
+description: >-
+  Free open source kanban board for workgroups.
+developer: plankanban
+website: https://planka.app/
+dependencies: []
+repo: https://github.com/plankanban/planka
+support: https://github.com/plankanban/planka/issues
+port: 1337
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+defaultUsername: ""
+deterministicPassword: true
+torOnly: false
+submitter: Umbrel
+submission: https://github.com/getumbrel/umbrel/commit/9ca55a25e043dcd50d5cb92c6ec756d368bb4794
