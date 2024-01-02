@@ -4,7 +4,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: planka_web_1
-      APP_PORT: 1337
+      APP_PORT: 5432
 
   web:
     image: ghcr.io/plankanban/planka:1.15.3@sha256:b943e3c3b20c23d6e7da299f067f172138586fe216b9e6a954e6634fb39d2fed
