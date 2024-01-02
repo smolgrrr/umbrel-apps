@@ -4,7 +4,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: planka_web_1
-      APP_PORT: 1337
+      APP_PORT: 3000
 
   web:
     image: ghcr.io/plankanban/planka:1.15.3@sha256:b943e3c3b20c23d6e7da299f067f172138586fe216b9e6a954e6634fb39d2fed
@@ -17,6 +17,8 @@ services:
           sleep 5;
         done; (exit $$s)"
     restart: unless-stopped
+    ports:
+      - 3000:1337
     volumes:
       - ${APP_DATA_DIR}/data/assets/user-avatars:/app/public/user-avatars
       - ${APP_DATA_DIR}/data/assets/project-background-images:/app/public/project-background-images
@@ -24,7 +26,7 @@ services:
     environment:
       - BASE_URL=http://$DEVICE_DOMAIN_NAME:1337
       - TRUST_PROXY=0
-      - DATABASE_URL=postgresql://postgres@postgres/planka
+      - DATABASE_URL=postgresql://postgres@planka_postgres_1/planka
       - SECRET_KEY=$APP_PASSWORD
     depends_on:
       - postgres
