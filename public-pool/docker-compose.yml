@@ -25,7 +25,7 @@ services:
       - DOMAIN=$DEVICE_DOMAIN_NAME
     labels:
       - "traefik.enable=true"
-      - - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_DOMAIN_NAME`) || HostRegexp(`{host:.+}`) || Path(`/`)"
+      - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_DOMAIN_NAME`) || HostRegexp(`{host:.+}`) || Path(`/`)"
       - "traefik.http.routers.public-pool-ui.entrypoints=web"
       - "traefik.http.services.public-pool-ui.loadbalancer.server.port=80"
 
