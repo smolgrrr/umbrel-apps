@@ -53,6 +53,6 @@ services:
       - ENABLE_PROXY=false
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_DOMAIN_NAME`) || HostRegexp(`{host:.+}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_DOMAIN_NAME`) && PathPrefix(`/api`)"
       - "traefik.http.routers.public-pool-api.entrypoints=web"
       - "traefik.http.services.public-pool-api.loadbalancer.server.port=3334"
