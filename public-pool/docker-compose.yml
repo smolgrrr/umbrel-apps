@@ -3,15 +3,31 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: public-pool_web_1
+      APP_HOST: public-pool_traefik_1
       APP_PORT: 80
       PROXY_AUTH_WHITELIST: "/api/*"
 
+  traefik:
+    image: traefik:v2.10.7@sha256:c5181ddf303f1ccfd4bd6d1d9c4867b0500efb6089a0f9ccb16612438f6e934f
+    restart: unless-stopped
+    command:
+      - "--accesslog=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
   web:
-    image: sethforprivacy/public-pool-ui:db286e5@sha256:1a411ed59cdf3a3bddbfc2b4b90b413ad7dbbd6787543aff3c4ae4ffb260b80e
+    image: smolgrrr/public-pool-ui:4445446@sha256:642810c69ee7fdb2bbedf186aed9b34ed31f4aaf20de0050fb957a96fea4af49
     restart: unless-stopped
     environment:
-      - DOMAIN=10.0.0.19
+      - DOMAIN=$DEVICE_DOMAIN_NAME
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_DOMAIN_NAME`)"
+      - "traefik.http.routers.public-pool-ui.entrypoints=web"
+      - "traefik.http.services.public-pool-ui.loadbalancer.server.port=80"
 
   server:
     image: sethforprivacy/public-pool:4bb00f2@sha256:0fc82e7123be68650c9e31f57a5a206e622acbcaa170e31219a488818ad6da6b
@@ -35,3 +51,8 @@ services:
       - API_SECURE=false
       - ENABLE_SOLO=true
       - ENABLE_PROXY=false
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_DOMAIN_NAME`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.public-pool-api.entrypoints=web"
+      - "traefik.http.services.public-pool-api.loadbalancer.server.port=3334"
