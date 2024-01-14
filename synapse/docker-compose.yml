@@ -13,7 +13,7 @@ services:
     restart: on-failure
     stop_grace_period: 1m
     entrypoint: "bash"
-    command: "-c 'exec ./start.py'"
+    command: "-c './start.py generate && ./start.py migrate_config && exec ./start.py'"
     volumes:
       - ${APP_DATA_DIR}/data/synapse:/data
       - ${APP_DATA_DIR}/data/homeserver.yaml:/data/homeserver.yaml
