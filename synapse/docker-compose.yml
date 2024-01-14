@@ -18,8 +18,6 @@ services:
       - ${APP_DATA_DIR}/data/synapse:/data
       - ${APP_DATA_DIR}/data/homeserver.yaml:/data/homeserver.yaml
     environment:
-      UID: "1000"
-      GID: "1000"
       SYNAPSE_HTTP_PORT: "${APP_SYNAPSE_PORT}"
       SYNAPSE_SERVER_NAME: "${APP_HIDDEN_SERVICE}"
       SYNAPSE_REPORT_STATS: "yes"
