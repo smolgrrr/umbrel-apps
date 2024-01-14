@@ -14,6 +14,7 @@ services:
     stop_grace_period: 1m
     volumes:
       - ${APP_DATA_DIR}/data/synapse:/data
+      - ${APP_DATA_DIR}/data/homeserver.yaml:/data/homeserver.yaml
     environment:
       UID: "1000"
       GID: "1000"
