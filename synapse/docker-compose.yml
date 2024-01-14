@@ -12,6 +12,8 @@ services:
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 1m
+    entrypoint: "bash"
+    command: "-c 'exec ./start.py'"
     volumes:
       - ${APP_DATA_DIR}/data/synapse:/data
       - ${APP_DATA_DIR}/data/homeserver.yaml:/data/homeserver.yaml
