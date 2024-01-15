@@ -6,12 +6,13 @@ services:
       APP_HOST: synapse_server_1
       APP_PORT: $APP_SYNAPSE_PORT
       PROXY_AUTH_ADD: "false"
-      
+
   server:
     image: matrixdotorg/synapse:latest
     restart: unless-stopped
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
+      SYNAPSE_CONFIG_PATH: "/data/homeserver.yaml"
       SYNAPSE_SERVER_NAME: "${APP_HIDDEN_SERVICE}"
       SYNAPSE_REPORT_STATS: "yes"
