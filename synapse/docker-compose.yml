@@ -13,7 +13,7 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/data
     command: >
-      bash -c "if [ ! -f /data/homeserver.yaml ]; then
+      sh -c "if [ ! -f /data/homeserver.yaml ]; then
         python -m synapse.app.homeserver \
           --server-name ${APP_HIDDEN_SERVICE} \
           --config-path /data/homeserver.yaml \
