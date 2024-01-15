@@ -6,21 +6,12 @@ services:
       APP_HOST: synapse_server_1
       APP_PORT: $APP_SYNAPSE_PORT
       PROXY_AUTH_ADD: "false"
-
+      
   server:
-    image: matrixdotorg/synapse:v1.98.0@sha256:0c7ad2c45c6ccfa2c9c72a4524e9cb13d26a5749d0fa3a838e3529ba51ccaa0d
-    user: "1000:1000"
-    restart: on-failure
-    stop_grace_period: 1m
-    entrypoint: "bash"
-    command: "-c 'exec ./start.py'"
+    image: matrixdotorg/synapse:latest
+    restart: unless-stopped
     volumes:
-      - ${APP_DATA_DIR}/data/synapse:/data
-      - ${APP_DATA_DIR}/data/homeserver.yaml:/data/homeserver.yaml
+      - ${APP_DATA_DIR}/data:/data
     environment:
-      SYNAPSE_CONFIG_PATH: "/data/homeserver.yaml"
-      SYNAPSE_HTTP_PORT: "${APP_SYNAPSE_PORT}"
       SYNAPSE_SERVER_NAME: "${APP_HIDDEN_SERVICE}"
       SYNAPSE_REPORT_STATS: "yes"
-      SYNAPSE_ENABLE_REGISTRATION: "yes"
-      SYNAPSE_NO_TLS: "yes"
