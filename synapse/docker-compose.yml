@@ -14,5 +14,3 @@ services:
       - ${APP_DATA_DIR}/data:/data
     environment:
       SYNAPSE_CONFIG_PATH: "/data/homeserver.yaml"
-      SYNAPSE_SERVER_NAME: "${APP_HIDDEN_SERVICE}"
-      SYNAPSE_REPORT_STATS: "yes"

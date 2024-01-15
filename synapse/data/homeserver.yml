@@ -24,7 +24,7 @@
 server_name: "${APP_HIDDEN_SERVICE}"
 pid_file: DATADIR/homeserver.pid
 listeners:
-  - port: 8008
+  - port: ${APP_SYNAPSE_PORT}
     tls: false
     type: http
     x_forwarded: true
@@ -36,8 +36,8 @@ database:
   name: sqlite3
   args:
     database: DATADIR/homeserver.db
-log_config: "CONFDIR/SERVERNAME.log.config"
+log_config: "CONFDIR/${APP_HIDDEN_SERVICE}.log.config"
 media_store_path: DATADIR/media_store
-signing_key_path: "CONFDIR/SERVERNAME.signing.key"
+signing_key_path: "CONFDIR/${APP_HIDDEN_SERVICE}.signing.key"
 trusted_key_servers:
   - server_name: "matrix.org"
