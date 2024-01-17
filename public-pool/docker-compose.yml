@@ -3,20 +3,36 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: public-pool_caddy_1
+      APP_HOST: public-pool_traefik_1
       APP_PORT: 80
-      PROXY_AUTH_ADD: "false"
+      PROXY_AUTH_WHITELIST: "/api/*"
 
-  caddy:
-    image: caddy:2.6.4-alpine@sha256:4dfec6c3b22c36b63ea4a3633c7cdbdaa9926d1324c27db2b0e2b70ef9cd105a
-    restart: on-failure
+  traefik:
+    image: traefik:v2.10.7@sha256:c5181ddf303f1ccfd4bd6d1d9c4867b0500efb6089a0f9ccb16612438f6e934f
+    restart: unless-stopped
+    command:
+      - "--accesslog=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     volumes:
-      - ${APP_DATA_DIR}/caddy-data/Caddyfile:/etc/caddy/Caddyfile
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   web:
-    image: smolgrrr/public-pool-ui:latest
+    image: smolgrrr/public-pool-ui:latest@sha256:a83aa6204ce616f3184fe3b5ace3d82f1260783fd49a0258b313b88a9d313965
     restart: unless-stopped
-    stop_grace_period: 30s
+    environment:
+      - DOMAIN=$DEVICE_DOMAIN_NAME
+    labels:
+      - "traefik.enable=true"
+      # Local domain
+      - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_DOMAIN_NAME`)"
+      - "traefik.http.routers.public-pool-ui.entrypoints=web"
+      - "traefik.http.services.public-pool-ui.loadbalancer.server.port=80"
+      # Web
+      - "traefik.http.routers.public-pool-ui-local.rule=Host(`$DEVICE_HOSTNAME`)"
+      - "traefik.http.routers.public-pool-ui-local.entrypoints=web"
+      - "traefik.http.services.public-pool-ui-local.loadbalancer.server.port=80"
 
   server:
     image: sethforprivacy/public-pool:4bb00f2@sha256:0fc82e7123be68650c9e31f57a5a206e622acbcaa170e31219a488818ad6da6b
@@ -40,3 +56,13 @@ services:
       - API_SECURE=false
       - ENABLE_SOLO=true
       - ENABLE_PROXY=false
+    labels:
+      - "traefik.enable=true"
+      # Local domain
+      - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_DOMAIN_NAME`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.public-pool-api.entrypoints=web"
+      - "traefik.http.services.public-pool-api.loadbalancer.server.port=3334"
+      # Web
+      - "traefik.http.routers.public-pool-api-local.rule=Host(`$DEVICE_HOSTNAME`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.public-pool-api-local.entrypoints=web"
+      - "traefik.http.services.public-pool-api-local.loadbalancer.server.port=3334"
