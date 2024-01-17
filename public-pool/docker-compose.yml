@@ -3,9 +3,15 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: public-pool_web_1
+      APP_HOST: public-pool_caddy_1
       APP_PORT: 80
       PROXY_AUTH_ADD: "false"
+
+  caddy:
+    image: caddy:2.6.4-alpine@sha256:4dfec6c3b22c36b63ea4a3633c7cdbdaa9926d1324c27db2b0e2b70ef9cd105a
+    restart: on-failure
+    volumes:
+      - ${APP_DATA_DIR}/caddy-data/Caddyfile:/etc/caddy/Caddyfile
 
   web:
     image: smolgrrr/public-pool-ui:latest
