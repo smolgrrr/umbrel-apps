@@ -22,11 +22,11 @@ services:
     image: smolgrrr/public-pool-ui:latest@sha256:a83aa6204ce616f3184fe3b5ace3d82f1260783fd49a0258b313b88a9d313965
     restart: unless-stopped
     environment:
-      - DOMAIN=$DEVICE_DOMAIN_NAME
+      - DOMAIN=$DEVICE_HOSTNAME
     labels:
       - "traefik.enable=true"
       # Local domain
-      - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_DOMAIN_NAME`)"
+      - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_HOSTNAME`)"
       - "traefik.http.routers.public-pool-ui.entrypoints=web"
       - "traefik.http.services.public-pool-ui.loadbalancer.server.port=80"
       # Web
@@ -59,7 +59,7 @@ services:
     labels:
       - "traefik.enable=true"
       # Local domain
-      - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_DOMAIN_NAME`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_HOSTNAME`) && PathPrefix(`/api`)"
       - "traefik.http.routers.public-pool-api.entrypoints=web"
       - "traefik.http.services.public-pool-api.loadbalancer.server.port=3334"
       # Web
