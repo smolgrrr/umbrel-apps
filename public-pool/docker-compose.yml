@@ -29,10 +29,6 @@ services:
       - "traefik.http.routers.public-pool-ui.rule=Host(`$DEVICE_HOSTNAME`)"
       - "traefik.http.routers.public-pool-ui.entrypoints=web"
       - "traefik.http.services.public-pool-ui.loadbalancer.server.port=80"
-      # Web
-      - "traefik.http.routers.public-pool-ui-local.rule=Host(`$DEVICE_HOSTNAME`)"
-      - "traefik.http.routers.public-pool-ui-local.entrypoints=web"
-      - "traefik.http.services.public-pool-ui-local.loadbalancer.server.port=80"
 
   server:
     image: sethforprivacy/public-pool:4bb00f2@sha256:0fc82e7123be68650c9e31f57a5a206e622acbcaa170e31219a488818ad6da6b
@@ -62,7 +58,3 @@ services:
       - "traefik.http.routers.public-pool-api.rule=Host(`$DEVICE_HOSTNAME`) && PathPrefix(`/api`)"
       - "traefik.http.routers.public-pool-api.entrypoints=web"
       - "traefik.http.services.public-pool-api.loadbalancer.server.port=3334"
-      # Web
-      - "traefik.http.routers.public-pool-api-local.rule=Host(`$DEVICE_HOSTNAME`) && PathPrefix(`/api`)"
-      - "traefik.http.routers.public-pool-api-local.entrypoints=web"
-      - "traefik.http.services.public-pool-api-local.loadbalancer.server.port=3334"
