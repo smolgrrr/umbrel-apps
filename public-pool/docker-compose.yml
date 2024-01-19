@@ -39,7 +39,7 @@ services:
   proxy:
     image: nginx:1.25.3@sha256:4c0fdaa8b6341bfdeca5f18f7837462c80cff90527ee35ef185571e1c327beac
     volumes:
-      - ${APP_DATA_DIR}/data/proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ${APP_DATA_DIR}/data/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - web
       - server
