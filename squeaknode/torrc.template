@@ -1,4 +1,0 @@
-# squeaknode p2p Hidden Service
-HiddenServiceDir /data/app-$APP_ID-p2p
-HiddenServicePort $APP_SQUEAKNODE_P2P_PORT squeaknode_web_1:$APP_SQUEAKNODE_P2P_PORT
-HiddenServicePort $APP_SQUEAKNODE_P2P_TESTNET_PORT squeaknode_web_1:$APP_SQUEAKNODE_P2P_TESTNET_PORT

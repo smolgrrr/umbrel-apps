@@ -1,1 +1,0 @@
-export APP_KOLLIDER_TOR_HS_EXTRA_PORTS="4244:kollider_ws_1:8080"

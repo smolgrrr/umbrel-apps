@@ -1,2 +1,0 @@
-export APP_GITEA_SSH_PORT="2222"
-export APP_GITEA_TOR_HS_EXTRA_PORTS="22:gitea_server_1:${APP_GITEA_SSH_PORT}"
