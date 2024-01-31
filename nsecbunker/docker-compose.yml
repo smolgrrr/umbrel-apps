@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: nsecbunker_nsecbunkerd_1
+      APP_PORT: 3000
+      PROXY_AUTH_ADD: "false"
+      
+  nsecbunkerd:
+    image: pablof7z/nsecbunkerd
+    build: .
+    restart: unless-stopped
+    pids_limit: 100
+    mem_limit: 256mb
+    memswap_limit: 256mb
+    volumes:
+      - ${APP_DATA_DIR}/data:/app/config
+    environment:
+      - DATABASE_URL="file:${APP_DATA_DIR}/data/nsecbunker.db"
+    depends_on:
+      - migrations
+
+  migrations:
+    image: pablof7z/nsecbunkerd
+    volumes:
+      - ${APP_DATA_DIR}/data:/app/config
+    env_file:
+      - .env
+    restart: no
+    entrypoint: ""
+    command:
+      - npx
+      - prisma
+      - migrate
+      - deploy

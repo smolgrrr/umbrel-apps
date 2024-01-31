@@ -1,0 +1,24 @@
+manifestVersion: 1
+id: nsecbunker
+category: social
+name: Nsecbunker
+version: "0.1.10"
+tagline: Daemon to remotely sign nostr events using keys.
+description: >- 
+  Daemon to remotely sign nostr events using keys.
+  
+developer: pablof7z
+website: nsecbunker.com
+dependencies: []
+repo: https://github.com/kind-0/nsecbunkerd
+support: https://github.com/kind-0/nsecbunkerd/issues
+port: 4175
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: smolgrrr
+submission: https://github.com/getumbrel/umbrel-apps/pull/459
