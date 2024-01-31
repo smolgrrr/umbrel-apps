@@ -18,6 +18,7 @@ services:
       - ${APP_DATA_DIR}/data:/app/config
     environment:
       - DATABASE_URL="file:${APP_DATA_DIR}/data/nsecbunker.db"
+      - ADMIN_NPUBS="npub13azv2cf3kd3xdzcwqxlgcudjg7r9nzak37usnn7h374lkpvd6rcq4k8m54"
     depends_on:
       - migrations
 
@@ -28,6 +29,7 @@ services:
     entrypoint: ""
     environment:
       - DATABASE_URL="file:${APP_DATA_DIR}/data/nsecbunker.db"
+      - ADMIN_NPUBS="npub13azv2cf3kd3xdzcwqxlgcudjg7r9nzak37usnn7h374lkpvd6rcq4k8m54"
     command:
       - npx
       - prisma
