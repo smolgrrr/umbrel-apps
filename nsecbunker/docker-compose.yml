@@ -25,9 +25,6 @@ services:
     image: pablof7z/nsecbunkerd
     volumes:
       - ${APP_DATA_DIR}/data:/app/config
-    env_file:
-      - .env
-    restart: no
     entrypoint: ""
     command:
       - npx
