@@ -26,6 +26,8 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data:/app/config
     entrypoint: ""
+    environment:
+      - DATABASE_URL="file:${APP_DATA_DIR}/data/nsecbunker.db"
     command:
       - npx
       - prisma
