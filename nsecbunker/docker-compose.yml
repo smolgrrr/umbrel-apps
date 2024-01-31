@@ -9,11 +9,7 @@ services:
       
   web:
     image: pablof7z/nsecbunkerd
-    build: .
     restart: unless-stopped
-    pids_limit: 100
-    mem_limit: 256mb
-    memswap_limit: 256mb
     volumes:
       - ${APP_DATA_DIR}/data:/app/config
     environment:
