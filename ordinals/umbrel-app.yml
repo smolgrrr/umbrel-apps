@@ -2,7 +2,7 @@ manifestVersion: 1
 id: ordinals
 category: bitcoin
 name: Ordinals
-version: "0.5.1"
+version: "0.15.0"
 tagline: Trustlessly view Ordinal inscriptions using your Bitcoin node.
 description: >
   A block explorer to trustlessly view Ordinal inscriptions. Search blocks, transactions, outputs, and individual satoshis.
@@ -12,7 +12,20 @@ description: >
 
 
   Disclaimer: The Ordinals app does not control, filter, or moderate the content hosted on the Bitcoin blockchain. Consequently, you may come across NSFW (Not Safe For Work), objectionable, or unlawful material while using the app.
-releaseNotes: ""
+releaseNotes: >-
+  This update takes Ordinals from 0.5.1 to 0.15.0 which includes many new features and changes:
+
+
+  - Send runes with ord wallet send
+
+  - Add ord balances to show rune balances
+
+  - Add ability to specify sat to batch inscribe
+
+  - and much more..
+
+
+  Full release notes can be found here: https://github.com/ordinals/ord/releases
 developer: Casey Rodarmor
 website: https://ordinals.com/
 dependencies:

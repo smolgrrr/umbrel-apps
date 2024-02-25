@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   ord:
-    image: nmfretz/ord:v0.5.1@sha256:0bbe9b14a8b05b783f0f2d967845a213e85f89f1b6ae3434bd2a8d60a271fddf
+    image: nmfretz/ord:0.15.0-test@sha256:10f70d72d82e4433874fdbef6a86a5d2178791e213824a197df7bf0d63690c95
     # This needs to run as root
     # user: "1000:1000"
     restart: on-failure
