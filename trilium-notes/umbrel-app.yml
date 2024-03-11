@@ -2,7 +2,7 @@ manifestVersion: 1
 id: trilium-notes
 category: files
 name: Trilium Notes
-version: "0.60.4"
+version: "0.63.3"
 tagline: Build your personal knowledge base with Trilium Notes
 description: >-
   Features
@@ -61,24 +61,18 @@ torOnly: false
 submitter: Pranshu Agrawal
 submission: https://github.com/getumbrel/umbrel-apps/pull/199
 releaseNotes: >-
-  This update upgrades Trilium Notes from version 0.59.4 to 0.60.4.
+  This update upgrades Trilium Notes from version 0.60.4 to 0.63.3 and includes:
 
 
-  Version 0.60.4 includes the following changes:
+  - add API method to erase a revision
 
-  - consistent tooltip arrow style
+  - PWA manifest fixes for extra auth
 
-  - selected text in HTML view is searched immediately in find box
+  - optimize migration process
 
-  - smooth scrolling for TOC
+  - Added more backend API methods to access options, attachments, revisions
 
-  - improved Cyrillic font support
-
-  - move "tree actions" to the right
-
-  - improved include note display
-
-  - added ability to override default search engine
+  - and much more...
 
 
-  Full release notes and detailed information for versions between 0.59.4 and 0.60.4. are available at https://github.com/zadam/trilium/releases
+  Full release notes and detailed information for versions between 0.60.4 and 0.63.3. are available at https://github.com/zadam/trilium/releases
