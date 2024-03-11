@@ -8,16 +8,19 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: matrixdotorg/synapse:latest
-    restart: unless-stopped
+    image: matrixdotorg/synapse:v1.98.0@sha256:0c7ad2c45c6ccfa2c9c72a4524e9cb13d26a5749d0fa3a838e3529ba51ccaa0d
+    restart: on-failure
+    stop_grace_period: 1m
+    user: "1000:1000"
+    entrypoint: python
+    command: "-m synapse.app.homeserver -c /data/homeserver.yaml"
     volumes:
       - ${APP_DATA_DIR}/data:/data
-    command: >
-      sh -c "if [ ! -f /data/homeserver.yaml ]; then
-        python -m synapse.app.homeserver \
-          --server-name ${APP_HIDDEN_SERVICE} \
-          --config-path /data/homeserver.yaml \
-          --generate-config \
-          --report-stats=yes;
-      fi && exec python -m synapse.app.homeserver \
-          --config-path /data/homeserver.yaml"
+    environment:
+      UID: "1000"
+      GID: "1000"
+      SYNAPSE_HTTP_PORT: "${APP_SYNAPSE_PORT}"
+      SYNAPSE_SERVER_NAME: "${APP_HIDDEN_SERVICE}"
+      SYNAPSE_REPORT_STATS: "yes"
+      SYNAPSE_ENABLE_REGISTRATION: "yes"
+      SYNAPSE_NO_TLS: "yes"
