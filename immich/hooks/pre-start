@@ -20,7 +20,7 @@ TARGET_VERSION="0.2.0"
 # Function to execute SQL commands and return the result
 execute_sql() {
     local sql=$1
-    docker exec -i postgres_1 psql -U immich -d immich -t -c "$sql"
+    docker exec -i immich_postgres_1 psql -U immich -d immich -t -c "$sql"
 }
 
 # Function to check the current installed version of pgvecto.rs
