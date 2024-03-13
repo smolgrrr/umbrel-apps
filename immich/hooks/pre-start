@@ -12,3 +12,53 @@ MODEL_CACHE_DIR="${APP_DATA_DIR}/model-cache"
 # delete tsdata directory if it exists
 TYPESENSE_DIR="${APP_DATA_DIR}/tsdata"
 [ -d "${TYPESENSE_DIR}" ] && rm -rf "${TYPESENSE_DIR}"
+
+# Define the current and target versions of pgvecto.rs
+CURRENT_VERSION="0.1.11"
+TARGET_VERSION="0.2.0"
+
+# Function to execute SQL commands and return the result
+execute_sql() {
+    local sql=$1
+    docker exec -i postgres_1 psql -U immich -d immich -t -c "$sql"
+}
+
+# Function to check the current installed version of pgvecto.rs
+check_pgvectors_version() {
+    local version
+    version=$(execute_sql "SELECT extversion FROM pg_catalog.pg_extension WHERE extname = 'vectors';" | xargs) # xargs trims whitespace
+    echo "$version"
+}
+
+# Function to update pgvecto.rs extension
+update_pgvectors() {
+    # Delete all index files as advised by the error message
+    # (You need to define how to delete the index files based on your system's configuration)
+
+    # Update the extension to the new version
+    execute_sql "ALTER EXTENSION vectors UPDATE TO '${TARGET_VERSION}';"
+
+    # Perform maintenance work
+    execute_sql "SELECT pgvectors_upgrade();"
+
+    # Restart PostgreSQL to apply the changes
+    # (You need to define how to restart PostgreSQL in your environment)
+
+    # Check the status of all vector indexes and reindex
+    local indexes
+    indexes=$(execute_sql "SELECT I.relname AS indexname FROM pg_index X JOIN pg_class I ON I.oid = X.indexrelid JOIN pg_am A ON A.oid = I.relam WHERE A.amname = 'vectors';")
+    for index in $indexes; do
+        execute_sql "REINDEX INDEX $index;"
+    done
+}
+
+# Get the current version of pgvecto.rs
+current_version=$(check_pgvectors_version)
+
+# Check if the current version matches the target version
+if [ "$current_version" = "$CURRENT_VERSION" ]; then
+    echo "Current pgvecto.rs version is $CURRENT_VERSION, updating to $TARGET_VERSION..."
+    update_pgvectors
+else
+    echo "Current pgvecto.rs version is $current_version, no update needed."
+fi
