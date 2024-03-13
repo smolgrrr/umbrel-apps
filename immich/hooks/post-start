@@ -24,6 +24,8 @@ check_pgvectors_version() {
 update_pgvectors() {
     # If upgrading from 0.1.x, perform the necessary steps before updating
     if [ "$OLD_VERSION" = "0.1.1" ]; then
+        # Ensure the 'vectors' schema exists
+        execute_sql "CREATE SCHEMA IF NOT EXISTS vectors;"
         execute_sql "UPDATE pg_catalog.pg_extension SET extversion = '0.1.1' WHERE extname = 'vectors';"
         execute_sql "UPDATE pg_catalog.pg_extension SET extrelocatable = true WHERE extname = 'vectors';"
         execute_sql "ALTER EXTENSION vectors SET SCHEMA vectors;"
