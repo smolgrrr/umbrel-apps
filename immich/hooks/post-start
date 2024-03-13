@@ -22,8 +22,13 @@ check_pgvectors_version() {
 
 # Function to update pgvecto.rs extension
 update_pgvectors() {
-    # Delete all index files as advised by the error message
-    # (You need to define how to delete the index files based on your system's configuration)
+    # If upgrading from 0.1.x, perform the necessary steps before updating
+    if [ "$OLD_VERSION" = "0.1.1" ]; then
+        execute_sql "UPDATE pg_catalog.pg_extension SET extversion = '0.1.1' WHERE extname = 'vectors';"
+        execute_sql "UPDATE pg_catalog.pg_extension SET extrelocatable = true WHERE extname = 'vectors';"
+        execute_sql "ALTER EXTENSION vectors SET SCHEMA vectors;"
+        execute_sql "UPDATE pg_catalog.pg_extension SET extrelocatable = false WHERE extname = 'vectors';"
+    fi
 
     # Update the extension to the new version
     execute_sql "ALTER EXTENSION vectors UPDATE TO '${TARGET_VERSION}';"
