@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefai
+set -euo pipefail
 
 # Define the current and target versions of pgvecto.rs
 CURRENT_VERSION="0.1.11"
