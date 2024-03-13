@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Your other commands here...
+# Change to the directory where docker-compose.yml is located
+cd /home/bruzzy/umbrel/app-data/immich
 
 # Bring up the immich_postgres service specifically
 docker-compose up -d immich_postgres_1
