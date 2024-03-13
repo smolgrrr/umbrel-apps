@@ -1,61 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Define the current and target versions of pgvecto.rs
-OLD_VERSION="0.1.1"
-TARGET_VERSION="0.2.0"
+# Your other commands here...
 
-IMMICH_POSTGRES_CONTAINER_NAME="immich_postgres_1"
+# Bring up the immich_postgres service specifically
+docker-compose up -d immich_postgres_1
 
-# Function to execute SQL commands and return the result
-execute_sql() {
-    local sql=$1
-    docker exec -i $IMMICH_POSTGRES_CONTAINER_NAME psql -U immich -d immich -t -c "$sql"
-}
-
-# Function to check the current installed version of pgvecto.rs
-check_pgvectors_version() {
-    local version
-    version=$(execute_sql "SELECT extversion FROM pg_catalog.pg_extension WHERE extname = 'vectors';" | xargs) # xargs trims whitespace
-    echo "$version"
-}
-
-# Function to update pgvecto.rs extension
-update_pgvectors() {
-    # If upgrading from 0.1.x, perform the necessary steps before updating
-    if [ "$OLD_VERSION" = "0.1.1" ]; then
-        # Ensure the 'vectors' schema exists
-        execute_sql "CREATE SCHEMA IF NOT EXISTS vectors;"
-        execute_sql "UPDATE pg_catalog.pg_extension SET extversion = '0.1.1' WHERE extname = 'vectors';"
-        execute_sql "UPDATE pg_catalog.pg_extension SET extrelocatable = true WHERE extname = 'vectors';"
-        execute_sql "ALTER EXTENSION vectors SET SCHEMA vectors;"
-        execute_sql "UPDATE pg_catalog.pg_extension SET extrelocatable = false WHERE extname = 'vectors';"
-    fi
-
-    # Update the extension to the new version
-    execute_sql "ALTER EXTENSION vectors UPDATE TO '${TARGET_VERSION}';"
-
-    # Perform maintenance work
-    execute_sql "SELECT pgvectors_upgrade();"
-
-    # Restart PostgreSQL to apply the changes
-    # (You need to define how to restart PostgreSQL in your environment)
-
-    # Check the status of all vector indexes and reindex
-    local indexes
-    indexes=$(execute_sql "SELECT I.relname AS indexname FROM pg_index X JOIN pg_class I ON I.oid = X.indexrelid JOIN pg_am A ON A.oid = I.relam WHERE A.amname = 'vectors';")
-    for index in $indexes; do
-        execute_sql "REINDEX INDEX $index;"
-    done
-}
-
-# Get the current version of pgvecto.rs
-current_version=$(check_pgvectors_version)
-
-# Check if the current version matches the target version
-if [ "$current_version" = "$OLD_VERSION" ]; then
-    echo "Current pgvecto.rs version is $OLD_VERSION, updating to $TARGET_VERSION..."
-    update_pgvectors
-else
-    echo "Current pgvecto.rs version is $current_version, no update needed."
-fi
+# Any additional post-start logic can go here...
