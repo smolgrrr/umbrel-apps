@@ -17,10 +17,11 @@ TYPESENSE_DIR="${APP_DATA_DIR}/tsdata"
 CURRENT_VERSION="0.1.11"
 TARGET_VERSION="0.2.0"
 
+IMMICH_POSTGRES_CONTAINER_NAME="immich_postgres_1"
 # Function to execute SQL commands and return the result
 execute_sql() {
     local sql=$1
-    docker exec -i immich_postgres_1 psql -U immich -d immich -t -c "$sql"
+    docker exec -i $IMMICH_POSTGRES_CONTAINER_NAME psql -U immich -d immich -t -c "$sql"
 }
 
 # Function to check the current installed version of pgvecto.rs
