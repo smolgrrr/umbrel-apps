@@ -18,6 +18,13 @@ CURRENT_VERSION="0.1.11"
 TARGET_VERSION="0.2.0"
 
 IMMICH_POSTGRES_CONTAINER_NAME="immich_postgres_1"
+
+# Wait for the PostgreSQL container to be fully up and running
+until docker exec $IMMICH_POSTGRES_CONTAINER_NAME pg_isready -U immich -d immich; do
+  echo "Waiting for PostgreSQL container to be ready..."
+  sleep 1
+done
+
 # Function to execute SQL commands and return the result
 execute_sql() {
     local sql=$1
