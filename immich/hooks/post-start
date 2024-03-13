@@ -47,7 +47,7 @@ current_version=$(check_pgvectors_version)
 
 # Check if the current version matches the target version
 if [ "$current_version" = "$OLD_VERSION" ]; then
-    echo "Current pgvecto.rs version is $CURRENT_VERSION, updating to $TARGET_VERSION..."
+    echo "Current pgvecto.rs version is $OLD_VERSION, updating to $TARGET_VERSION..."
     update_pgvectors
 else
     echo "Current pgvecto.rs version is $current_version, no update needed."
