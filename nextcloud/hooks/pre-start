@@ -12,6 +12,7 @@ APP_COMPOSE_BACKUP_FILE="${APP_DATA_DIR}/docker-compose.yml.bak"
 # Supported list of Nextcloud migrations
 VERSIONS=()
 VERSIONS+=( "22.1.1.2" )
+VERSIONS+=( "22.2.10.2" )
 VERSIONS+=( "22.2.10.2-patch" )
 VERSIONS+=( "23.0.11.1" )
 VERSIONS+=( "24.0.7.1" )
