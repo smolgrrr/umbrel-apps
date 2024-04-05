@@ -120,7 +120,7 @@ for i in "${!VERSIONS[@]}"; do
 	check_compose_file "${image}"
 
 	nextcloud_version=$(get_version)
-	sed -i "s/${nextcloud_version}/${nextcloud_version}-patch/" "${CONFIG_PHP_FILE}"
+	sed -i "s/${nextcloud_version}/${nextcloud_version}/" "${CONFIG_PHP_FILE}"
 
 	"${UMBREL_ROOT}/scripts/app" start nextcloud
 
