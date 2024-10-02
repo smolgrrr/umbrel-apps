@@ -2,7 +2,7 @@ manifestVersion: 1
 id: public-pool
 category: bitcoin
 name: Public Pool
-version: "820d8d1"
+version: "4282233"
 tagline: Fully Open Source Solo Bitcoin Mining Pool
 description: >-
   Run your own Bitcoin Solo Mining Pool with no fees.
